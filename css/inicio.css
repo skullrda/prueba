@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'Roboto'; font-style: normal; font-weight: 400;
+  src: url(../font/Roboto-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto'; font-style: normal; font-weight: 500;
+  src: url(../font/Roboto-MediumRegular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto'; font-style: normal; font-weight: 700;
+  src: url(../font/Roboto-Bold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto'; font-style: normal; font-weight: 900;
+  src: url(../font/Roboto-BlackRegular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Mono'; font-style: normal; font-weight: 600;
+  src: url(../font/Roboto-Mono.ttf) format('truetype');
+}
+
+/* ************************************************************************* */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #222;
+
+}
+
+.contenedor {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Define las filas: header, nav, main (expansible), footer */
+  min-height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+}
+
+.contenedor .header {
+  display: grid;
+  grid-template-rows: auto auto;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  background-color: rgba(50, 50, 50, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  padding: 10px 0;    
+}
+
+.titulo {
+	font-size: 26px; font-weight: bold;
+	background: #FFF; -webkit-background-clip: text; -moz-background-clip: text; background-clip: text;
+	color: transparent; text-transform: uppercase; text-shadow: 0px 3px 3px rgba(0,0,0,0.6);
+}
+
+.subtitulo {
+	font-size: 20px; font-weight: bold;
+	background: #FFF; -webkit-background-clip: text; -moz-background-clip: text; background-clip: text;
+  color: rgba(240,234,214, 1);
+}
+
+.contenedor .main	{
+  display: flex;
+  justify-content: left;
+  align-items: left;	
+}
+
+.contenedor .footer {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  color: white;
+  background-color: rgba(50, 50, 50, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.6);
+  padding: 6px 10px;
+}
