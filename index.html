@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="css/inicio.css">
+	<title>Base</title>
+
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+		
+</head>
+<body>
+
+<div class="contenedor">
+
+	<header class="header">
+		<span class="titulo">Sin nada</span>
+	</header>
+
+	<main class="main">
+		<video id="videoPlayer" controls></video>
+	</main>
+
+	<footer class="footer">
+
+	</footer>
+
+</div>	
+
+</body>
+
+<script>
+
+// https://rutube.ru/api/play/options/0c0c6fc1eee8c2c40019f94b492124ee/?no_404=true&referer=&pver=v2&client=wdp
+
+const m3u8Url = "https://river-3-316.rutube.ru/hls-vod/09Zyd13XFz4F5ofnHOl44A/1742257476/1792/0x5000c500c8c29eb3/979e02d976b444538eca525888b5fbea.mp4.m3u8";
+const proxyUrl = "https://miproxy.jc-scorpion2010.workers.dev?url=";
+
+// Obtener el M3U8 y modificar sus URLs
+fetch(proxyUrl + encodeURIComponent(m3u8Url))
+  .then(response => response.text())
+  .then(m3u8Content => {
+    // Reemplazar URLs de los segmentos TS
+    const proxiedM3U8 = m3u8Content.replace(
+      /(\bhttps?:\/\/\S+)/g, // Buscar URLs absolutas
+      (match) => proxyUrl + encodeURIComponent(match) // Reemplazar con proxy
+    );
+
+    // Crear Blob del M3U8 modificado
+    const blob = new Blob([proxiedM3U8], { type: "application/vnd.apple.mpegurl" });
+    const blobUrl = URL.createObjectURL(blob);
+
+    // Reproducir con hls.js
+    const video = document.getElementById("videoPlayer");
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(blobUrl);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+    }
+  });
+
+</script>
+
+</html>
